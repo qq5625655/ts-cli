@@ -1,0 +1,23 @@
+// .babelrc
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                // "useBuiltIns": "usage",
+                // "corejs": 3,
+                "modules":false // 为false否则babel有机会在rollup操作前，将模块转换为CommandJs模块
+            }
+        ],
+        "@babel/preset-typescript"
+    ],
+    "plugins": [
+       [
+        "@babel/plugin-transform-runtime", {
+            "corejs":3,
+            "useESModules": true
+        }
+       ]
+    ]
+  
+  }

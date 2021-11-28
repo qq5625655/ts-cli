@@ -2,7 +2,9 @@
   "name": "ts_cli",
   "version": "1.0.0",
   "description": "这是一个ts的脚手架项目",
-  "main": "index.js",
+  "main": "lib/bundle.cjs.js",
+  "module": "lib/bundle.esm.js",
+  "browser": "lib/bundle.browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:comment": "启动开发环境",
@@ -14,23 +16,46 @@
     "commit:comment": "引导设置规范化的提交信息",
     "commit": "cz",
     "build:comment": "构建",
-    "build": "npm run eslint && npm run prettier && rm -rf lib && tsc --build"
+    "build": "npm run eslint && npm run prettier && rm -rf lib && tsc --build",
+    "build:check-ts": "tsc --noEmit",
+    "build:types": "tsc --emitDeclarationOnly",
+    "type-check": "tsc --watch",
+    "build:rollup-start": "rollup -c ./rollup/rollup.base.js -w",
+    "build:rollup-build": "  rm -rf lib & npm run build:types & rollup -c ./rollup/rollup.base.js",
+    "start:webpack": "webpack serve --config ./webpack/webpack.base.ts"
   },
   "author": "zhangxusheng",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-eslint": "^8.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/node": "^16.11.9",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.3.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^4.3.8",
     "lint-staged": "^12.0.3",
     "prettier": "^2.4.1",
+    "rollup": "^2.60.1",
+    "rollup-plugin-babel": "^4.4.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
   },
   "config": {
     "commitizen": {
@@ -44,6 +69,14 @@
     }
   },
   "lint-staged": {
-    "*.ts": ["npm run eslint", "npm run prettier"]
+    "*.ts": [
+      "build:check-ts",
+      "npm run eslint",
+      "npm run prettier"
+    ]
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.16.3",
+    "@babel/runtime-corejs3": "^7.16.3"
   }
 }
