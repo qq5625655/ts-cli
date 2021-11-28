@@ -17,7 +17,7 @@
     "commit": "cz",
     "build:comment": "构建",
     "build": "npm run eslint && npm run prettier && rm -rf lib && tsc --build",
-    "build:check-ts": "tsc --noEmit",
+    "build:check-ts": "tsc --noEmit  --skipLibCheck",
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --watch",
     "build:rollup-start": "rollup -c ./rollup/rollup.base.js -w",
