@@ -9,9 +9,10 @@ function add(): string {
     return a + b;
 }
 
-
-
+let test2 = '1';
+test2 = '2';
+console.log('e', test2);
 console.log('a', a, b, 2222);
 add();
 console.log(321312);
-export {}
+export {};

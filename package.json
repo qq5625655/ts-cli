@@ -21,7 +21,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --watch",
     "build:rollup-start": "rollup -c ./rollup/rollup.base.js -w",
-    "build:rollup-build": "  rm -rf lib & npm run build:types & rollup -c ./rollup/rollup.base.js",
+    "build:rollup-build": "  rm -rf lib & npm run build:check-ts & npm run build:types & rollup -c ./rollup/rollup.base.js",
     "start:webpack": "webpack serve --config ./webpack/webpack.base.ts"
   },
   "author": "zhangxusheng",
@@ -70,9 +70,9 @@
   },
   "lint-staged": {
     "*.ts": [
-      "build:check-ts",
       "npm run eslint",
-      "npm run prettier"
+      "npm run prettier",
+      "npm run build:check-ts"
     ]
   },
   "dependencies": {
